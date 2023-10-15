@@ -23,9 +23,5 @@ export default defineConfig({
   ],
   resolve: {
     preserveSymlinks: true,
-    alias: {
-      path: "rollup-plugin-node-polyfills/polyfills/path",
-      fs: "./src/fs-mock.js",
-    },
   },
 })
