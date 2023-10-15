@@ -1,0 +1,8 @@
+{% include "@tests/section.twig" with {title: 'Include'} %}
+{% embed "@tests/section.twig" with {title: 'Embed'} %}
+  {% block content %}
+    Lorem ipsum dolor sit amet.
+    {% include "@tests/button.twig" with {text: 'Nested include'} %}
+  {% endblock %}
+{% endembed %}
+{% include "@tests/section.twig" %}
