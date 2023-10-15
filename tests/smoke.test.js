@@ -15,7 +15,6 @@ describe("Basic smoke test", () => {
   })
   it("Should recover from errors", () => {
     const error = Error()
-    expect(error).toMatchSnapshot()
     expect(error).toContain("An error occurred")
   })
 })

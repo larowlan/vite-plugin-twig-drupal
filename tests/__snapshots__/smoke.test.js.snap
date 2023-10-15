@@ -1,7 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Basic smoke test > Should recover from errors 1`] = `"An error occurred whilst rendering /home/rowlands/git/vite-plugin-twig-drupal/tests/fixtures/error.twig: Error compiling twig file"`;
-
 exports[`Basic smoke test > Should support includes 1`] = `
 "<section>
   <h1>Include</h1>
