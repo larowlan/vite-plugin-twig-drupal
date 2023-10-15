@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/larowlan/twig-testing-library.git"
+    "url": "https://github.com/larowlan/vite-plugin-twig-drupal.git"
   },
   "dependencies": {
     "drupal-attribute": "^1.0.2",
