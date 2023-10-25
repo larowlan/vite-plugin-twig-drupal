@@ -104,7 +104,7 @@ With this config in place you should be able to import twig files into your stor
 ```javascript
 // stories/Button.stories.js
 
-// Button will be a Javascript function that excepts variables for the twig template.
+// Button will be a Javascript function that accepts variables for the twig template.
 import Button from './button.twig';
 
 // Import stylesheets, this could be a sass or postcss file too.
@@ -149,7 +149,6 @@ export const ButtonStrip = {
 
 
 ```
-- Refer to the [Dom testing library docs](https://testing-library.com/docs/dom-testing-library/example-intro), we're really just adding the ability to render twig templates on top of that.
 
 ## Issues
 
