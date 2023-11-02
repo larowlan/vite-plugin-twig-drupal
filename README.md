@@ -77,7 +77,7 @@ You then need to configure your vite.config.js.
 
 ```javascript
 import { defineConfig } from "vite"
-import twig from "./src/index.js"
+import twig from 'vite-plugin-twig-drupal';
 import { join } from "node:path"
 
 export default defineConfig({
