@@ -9,6 +9,7 @@ export default defineConfig({
       entry: {
         test: resolve(__dirname, "tests/fixtures/mockup.twig"),
         error: resolve(__dirname, "tests/fixtures/error.twig"),
+        errorInclude: resolve(__dirname, "tests/fixtures/error-include.twig"),
       },
       name: "vite-plugin-twig-drupal",
       fileName: (_, entry) => `${entry}.js`,

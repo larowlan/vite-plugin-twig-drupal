@@ -1,5 +1,6 @@
 import Markup from "../dist/test.js"
 import Error from "../dist/error.js"
+import ErrorInclude from "../dist/errorInclude.js"
 import { describe, expect, it } from "vitest"
 
 describe("Basic smoke test", () => {
@@ -15,6 +16,10 @@ describe("Basic smoke test", () => {
   })
   it("Should recover from errors", () => {
     const error = Error()
+    expect(error).toContain("An error occurred")
+  })
+  it("Should recover from include errors", () => {
+    const error = ErrorInclude()
     expect(error).toContain("An error occurred")
   })
 })
