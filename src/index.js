@@ -182,7 +182,6 @@ const plugin = (options = {}) => {
             return frameworkTransform('An error occurred whilst rendering ${id}: ' + e.toString());
           }
         }`
-        console.log(output)
         return {
           code: output,
           map: null,
