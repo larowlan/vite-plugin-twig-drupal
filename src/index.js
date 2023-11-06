@@ -64,10 +64,20 @@ const compileTemplate = (id, file, { namespaces }) => {
 
 Twig.cache(false)
 
-const errorHandler = (id) => (e) => ({
-  code: `export default () => 'An error occurred whilst rendering ${id}: ${e.toString()}';`,
-  map: null,
-})
+const errorHandler =
+  (id, isDefault = true) =>
+  (e) => {
+    if (isDefault) {
+      return {
+        code: `export default () => 'An error occurred whilst rendering ${id}: ${e.toString()}';`,
+        map: null,
+      }
+    }
+    return {
+      code: null,
+      map: null,
+    }
+  }
 
 const plugin = (options = {}) => {
   options = { ...defaultOptions, ...options }
@@ -109,13 +119,15 @@ const plugin = (options = {}) => {
             const file = Twig.path.expandNamespace(options.namespaces, template)
             if (!seen.includes(file)) {
               includePromises.push(
-                new Promise(async (resolve) => {
+                new Promise(async (resolve, reject) => {
                   const { includes, code } = await compileTemplate(
                     template,
                     file,
                     options
-                  )
-                  includes.forEach(processIncludes)
+                  ).catch(errorHandler(template, false))
+                  if (includes) {
+                    includes.forEach(processIncludes)
+                  }
                   resolve(code)
                 })
               )
