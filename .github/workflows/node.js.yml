@@ -9,7 +9,7 @@ jobs:
   main:
     strategy:
       matrix:
-        node: [16, 18]
+        node: [18, 20]
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
