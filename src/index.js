@@ -18,6 +18,7 @@ const includeTokenTypes = [
   "Twig.logic.type.embed",
   "Twig.logic.type.include",
   "Twig.logic.type.extends",
+  "Twig.logic.type.import",
 ]
 
 const pluckIncludes = (tokens) => {
@@ -136,6 +137,7 @@ const plugin = (options = {}) => {
           }
           includes.forEach(processIncludes)
           embed = includes
+            .filter((template) => template !== "_self")
             .map(
               (template) =>
                 `import '${resolve(
