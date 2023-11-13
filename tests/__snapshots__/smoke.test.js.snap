@@ -23,6 +23,23 @@ exports[`Basic smoke test > Should support includes 1`] = `
 "
 `;
 
+exports[`Basic smoke test > Should support macros 1`] = `
+"<ul>
+      <li><a href=\\"/home\\">Home</a>
+      </li>
+
+      <li><a href=\\"/about\\">About</a>
+          <ul>
+                      <li><a href=\\"/contact\\">Contact</a>
+      </li>
+
+              </ul>
+      </li>
+
+</ul>
+"
+`;
+
 exports[`Basic smoke test > Should support variables 1`] = `
 "<section>
   <h1>Include</h1>

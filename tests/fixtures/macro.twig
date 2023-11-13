@@ -1,0 +1,12 @@
+{% macro menu_link(title, href, children = []) %}
+  {% import _self as navigation %}
+  <li><a href="{{ href }}">{{ title }}</a>
+    {% if children|length %}
+      <ul>
+        {% for child in children %}
+          {{ navigation.menu_link(child.title, child.href) }}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </li>
+{% endmacro %}

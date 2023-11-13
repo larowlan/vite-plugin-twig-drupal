@@ -1,0 +1,7 @@
+{% import "@tests/macro.twig" as navigation %}
+<ul>
+  {{ navigation.menu_link('Home', '/home') }}
+  {{ navigation.menu_link('About', '/about', [
+    { title: 'Contact', href: '/contact'}
+  ]) }}
+</ul>
