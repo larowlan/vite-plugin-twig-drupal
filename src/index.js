@@ -30,7 +30,7 @@ const resolveFile = (directory, file) => {
   return resolve(directory, file)
 }
 
-const pluckIncludes = (tokens, relative) => {
+const pluckIncludes = (tokens) => {
   return [
     ...tokens
       .filter((token) => includeTokenTypes.includes(token.token?.type))
@@ -42,10 +42,7 @@ const pluckIncludes = (tokens, relative) => {
         []
       ),
     ...tokens.reduce(
-      (carry, token) => [
-        ...carry,
-        ...pluckIncludes(token.token?.output || [], relative),
-      ],
+      (carry, token) => [...carry, ...pluckIncludes(token.token?.output || [])],
       []
     ),
   ].filter((value, index, array) => {
@@ -67,11 +64,7 @@ const compileTemplate = (id, file, { namespaces }) => {
           return
         }
         resolve({
-          // We don't use dirname here because this ends up in the browser.
-          includes: pluckIncludes(
-            template.tokens,
-            template.id.split("/").slice(0, -1).join("/")
-          ),
+          includes: pluckIncludes(template.tokens),
           code: template.compile(options),
         })
       },
