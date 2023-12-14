@@ -1,6 +1,8 @@
 import Twig from "twig"
+import { resolve, dirname } from "node:path"
+import { existsSync } from "node:fs"
+
 const { twig } = Twig
-import { resolve } from "node:path"
 
 const FRAMEWORK_REACT = "react"
 const FRAMEWORK_HTML = "html"
@@ -21,7 +23,14 @@ const includeTokenTypes = [
   "Twig.logic.type.import",
 ]
 
-const pluckIncludes = (tokens) => {
+const resolveFile = (directory, file) => {
+  if (existsSync(resolve(file))) {
+    return resolve(file)
+  }
+  return resolve(directory, file)
+}
+
+const pluckIncludes = (tokens, relative) => {
   return [
     ...tokens
       .filter((token) => includeTokenTypes.includes(token.token?.type))
@@ -33,7 +42,10 @@ const pluckIncludes = (tokens) => {
         []
       ),
     ...tokens.reduce(
-      (carry, token) => [...carry, ...pluckIncludes(token.token?.output || [])],
+      (carry, token) => [
+        ...carry,
+        ...pluckIncludes(token.token?.output || [], relative),
+      ],
       []
     ),
   ].filter((value, index, array) => {
@@ -55,7 +67,11 @@ const compileTemplate = (id, file, { namespaces }) => {
           return
         }
         resolve({
-          includes: pluckIncludes(template.tokens),
+          // We don't use dirname here because this ends up in the browser.
+          includes: pluckIncludes(
+            template.tokens,
+            template.id.split("/").slice(0, -1).join("/")
+          ),
           code: template.compile(options),
         })
       },
@@ -70,7 +86,9 @@ const errorHandler =
   (e) => {
     if (isDefault) {
       return {
-        code: `export default () => 'An error occurred whilst rendering ${id}: ${e.toString()}';`,
+        code: `export default () => 'An error occurred whilst rendering ${id}: ${e.toString()} ${
+          e.stack
+        }';`,
         map: null,
       }
     }
@@ -117,8 +135,11 @@ const plugin = (options = {}) => {
           includes = result.includes
           const includePromises = []
           const processIncludes = (template) => {
-            const file = Twig.path.expandNamespace(options.namespaces, template)
-            if (!seen.includes(file)) {
+            const file = resolveFile(
+              dirname(id),
+              Twig.path.expandNamespace(options.namespaces, template)
+            )
+            if (!seen.includes(template)) {
               includePromises.push(
                 new Promise(async (resolve, reject) => {
                   const { includes, code } = await compileTemplate(
@@ -132,7 +153,7 @@ const plugin = (options = {}) => {
                   resolve(code)
                 })
               )
-              seen.push(file)
+              seen.push(template)
             }
           }
           includes.forEach(processIncludes)
@@ -140,7 +161,8 @@ const plugin = (options = {}) => {
             .filter((template) => template !== "_self")
             .map(
               (template) =>
-                `import '${resolve(
+                `import '${resolveFile(
+                  dirname(id),
                   Twig.path.expandNamespace(options.namespaces, template)
                 )}';`
             )

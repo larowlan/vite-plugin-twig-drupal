@@ -9,6 +9,7 @@ describe("Basic smoke test", () => {
     const markup = Markup()
     expect(markup).toMatchSnapshot()
     expect(markup).toContain("Nested include")
+    expect(markup).toContain("Relative include")
   })
   it("Should support variables", () => {
     const markup = Markup({ title: "Pickle Fixie" })

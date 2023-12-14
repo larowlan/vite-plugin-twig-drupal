@@ -20,6 +20,12 @@ exports[`Basic smoke test > Should support includes 1`] = `
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
 </section>
+<section>
+  <h1>Relative include</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
 "
 `;
 
@@ -56,6 +62,12 @@ exports[`Basic smoke test > Should support variables 1`] = `
 </section>
 <section>
   <h1>Pickle Fixie</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<section>
+  <h1>Relative include</h1>
   <article>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
