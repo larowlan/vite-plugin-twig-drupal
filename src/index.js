@@ -111,11 +111,8 @@ const plugin = (options = {}) => {
           frameworkInclude = `import React from 'react'`
           frameworkTransform = `const frameworkTransform = (html) => React.createElement('div', {dangerouslySetInnerHTML: {'__html': html}});;`
         }
-        let embed,
-          embeddedIncludes,
-          code,
-          includes,
-          seen = []
+        let embed, embeddedIncludes, functions
+        code, includes, (seen = [])
         try {
           const result = await compileTemplate(id, id, options).catch(
             errorHandler(id)
@@ -160,6 +157,16 @@ const plugin = (options = {}) => {
                 )}';`
             )
             .join("\n")
+
+          functions = Object.entries(options.functions)
+            .map(([name, value]) => {
+              return `
+              const ${name} = ${value};
+              ${name}(Twig);
+            `
+            })
+            .join("\n")
+
           const includeResult = await Promise.all(includePromises).catch(
             errorHandler(id)
           )
@@ -176,10 +183,15 @@ const plugin = (options = {}) => {
         import DrupalAttribute from 'drupal-attribute';
         import { addDrupalExtensions } from 'drupal-twig-extensions/twig';
         ${frameworkInclude}
-        
+
         ${embed}
 
-        addDrupalExtensions(Twig);
+        ${functions}
+
+        addDrupalExtensions(Twig, {
+          active_theme: '${options.activeTheme ?? "default"}'
+        });
+
         // Disable caching.
         Twig.cache(false);
 
