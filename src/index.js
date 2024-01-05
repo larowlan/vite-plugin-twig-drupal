@@ -111,8 +111,13 @@ const plugin = (options = {}) => {
           frameworkInclude = `import React from 'react'`
           frameworkTransform = `const frameworkTransform = (html) => React.createElement('div', {dangerouslySetInnerHTML: {'__html': html}});;`
         }
-        let embed, embeddedIncludes, functions
-        code, includes, (seen = [])
+        let embed,
+          embeddedIncludes,
+          functions,
+          code,
+          includes,
+          seen = []
+
         try {
           const result = await compileTemplate(id, id, options).catch(
             errorHandler(id)
