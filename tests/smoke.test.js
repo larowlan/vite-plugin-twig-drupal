@@ -29,4 +29,10 @@ describe("Basic smoke test", () => {
     expect(markup).toContain("Contact")
     expect(markup).toMatchSnapshot()
   })
+  it("Should support global context and functions", () => {
+    const markup = Markup()
+    expect(markup).toMatchSnapshot()
+    expect(markup).toContain("Nested include")
+    expect(markup).toContain("IT WORKS!")
+  })
 })

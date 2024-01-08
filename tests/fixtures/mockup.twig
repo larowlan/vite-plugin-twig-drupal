@@ -3,6 +3,9 @@
   {% block content %}
     Lorem ipsum dolor sit amet.
     {% include "@tests/button.twig" with {text: 'Nested include'} %}
+    {% if active_theme == 'poodles' %}
+      {{ testFunction() }}
+    {% endif %}
   {% endblock %}
 {% endembed %}
 {% include "@tests/section.twig" %}

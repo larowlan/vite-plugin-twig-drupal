@@ -11,6 +11,7 @@ const defaultOptions = {
   namespaces: {},
   filters: {},
   functions: {},
+  globalContext: {},
   framework: FRAMEWORK_HTML,
   pattern: /\.(twig)(\?.*)?$/,
 }
@@ -113,9 +114,11 @@ const plugin = (options = {}) => {
         }
         let embed,
           embeddedIncludes,
+          functions,
           code,
           includes,
           seen = []
+
         try {
           const result = await compileTemplate(id, id, options).catch(
             errorHandler(id)
@@ -160,6 +163,16 @@ const plugin = (options = {}) => {
                 )}';`
             )
             .join("\n")
+
+          functions = Object.entries(options.functions)
+            .map(([name, value]) => {
+              return `
+              const ${name} = ${value};
+              ${name}(Twig);
+            `
+            })
+            .join("\n")
+
           const includeResult = await Promise.all(includePromises).catch(
             errorHandler(id)
           )
@@ -176,10 +189,11 @@ const plugin = (options = {}) => {
         import DrupalAttribute from 'drupal-attribute';
         import { addDrupalExtensions } from 'drupal-twig-extensions/twig';
         ${frameworkInclude}
-        
+
         ${embed}
 
-        addDrupalExtensions(Twig);
+        ${functions}
+
         // Disable caching.
         Twig.cache(false);
 
@@ -191,7 +205,8 @@ const plugin = (options = {}) => {
           ${includes ? `component.options.allowInlineIncludes = true;` : ""}
           try {
             return frameworkTransform(component.render({
-            attributes: new DrupalAttribute(),
+              attributes: new DrupalAttribute(),
+              ...${JSON.stringify(options.globalContext)},
               ...context
             }));
           }
