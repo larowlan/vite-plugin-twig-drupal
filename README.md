@@ -90,7 +90,17 @@ export default defineConfig({
       },
       // Optional if you are using React storybook renderer. The default is 'html' and works with storybook's html
       // renderer.
-      // framework: 'react' 
+      // framework: 'react'
+      functions: {
+        // You can add custom functions - each is a function that is passed the active Twig instance and should call
+        // e.g. extendFunction to register a function
+        reverse: (twigInstance) => twigInstance.extendFunction("reverse", () => (text) => text.split(' ').reverse().join(' ')),
+      },
+      globalContext: {
+        // Global variables that should be present in all templates.
+        active_theme: 'my_super_theme',
+        is_front_page: false,
+      },
     }),
     // Other vite plugins.
   ],
