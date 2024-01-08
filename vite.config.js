@@ -18,6 +18,13 @@ export default defineConfig({
   },
   plugins: [
     twig({
+      globalContext: {
+        active_theme: "poodles",
+      },
+      functions: {
+        testFunction: (instance) =>
+          instance.extendFunction("testFunction", () => "IT WORKS!"),
+      },
       namespaces: {
         tests: join(__dirname, "/tests/fixtures"),
       },

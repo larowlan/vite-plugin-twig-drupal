@@ -11,6 +11,7 @@ const defaultOptions = {
   namespaces: {},
   filters: {},
   functions: {},
+  globalContext: {},
   framework: FRAMEWORK_HTML,
   pattern: /\.(twig)(\?.*)?$/,
 }
@@ -193,10 +194,6 @@ const plugin = (options = {}) => {
 
         ${functions}
 
-        addDrupalExtensions(Twig, {
-          active_theme: '${options.activeTheme ?? "default"}'
-        });
-
         // Disable caching.
         Twig.cache(false);
 
@@ -208,7 +205,8 @@ const plugin = (options = {}) => {
           ${includes ? `component.options.allowInlineIncludes = true;` : ""}
           try {
             return frameworkTransform(component.render({
-            attributes: new DrupalAttribute(),
+              attributes: new DrupalAttribute(),
+              ...${JSON.stringify(options.globalContext)},
               ...context
             }));
           }
