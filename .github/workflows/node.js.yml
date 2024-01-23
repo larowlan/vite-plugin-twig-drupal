@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix:
         node: [18, 20]
+        vite: [4, 5]
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -27,6 +28,9 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
+
+      - name: ⚡️ Setup vite
+        run: npm install vite@${{ matrix.vite }}
 
       - name: 🧹 Linting
         run: npm run lint
