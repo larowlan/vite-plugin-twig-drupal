@@ -31,12 +31,12 @@
     "twig": "^1.16.0"
   },
   "peerDependencies": {
-    "vite": "^4.4.11"
+    "vite": "^4.4.11 || ^5"
   },
   "devDependencies": {
     "prettier": "^3.0.3",
     "semantic-release": "^22.0.5",
-    "vite": "^4.4.11",
+    "vite": "^4.4.11 || ^ 5",
     "vitest": "^0.34.6"
   }
 }
