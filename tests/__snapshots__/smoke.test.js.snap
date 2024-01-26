@@ -1,5 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Basic smoke test > Should recognise default Drupal functions 1`] = `
+"
+<p>Functions work</p>"
+`;
+
 exports[`Basic smoke test > Should support global context and functions 1`] = `
 "<section>
   <h1>Include</h1>
