@@ -11,6 +11,10 @@ export default defineConfig({
         error: resolve(__dirname, "tests/fixtures/error.twig"),
         menu: resolve(__dirname, "tests/fixtures/menu.twig"),
         errorInclude: resolve(__dirname, "tests/fixtures/error-include.twig"),
+        drupalFunctions: resolve(
+          __dirname,
+          "tests/fixtures/drupal-functions.twig"
+        ),
       },
       name: "vite-plugin-twig-drupal",
       fileName: (_, entry) => `${entry}.js`,

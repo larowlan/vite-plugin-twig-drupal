@@ -194,6 +194,8 @@ const plugin = (options = {}) => {
 
         ${functions}
 
+        addDrupalExtensions(Twig);
+        
         // Disable caching.
         Twig.cache(false);
 
