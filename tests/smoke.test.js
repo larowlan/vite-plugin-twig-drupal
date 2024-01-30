@@ -1,6 +1,7 @@
 import Markup from "../dist/test.js"
 import Error from "../dist/error.js"
 import ErrorInclude from "../dist/errorInclude.js"
+import drupalFunctions from "../dist/drupalFunctions.js"
 import Menu from "../dist/menu.js"
 import { describe, expect, it } from "vitest"
 
@@ -34,5 +35,10 @@ describe("Basic smoke test", () => {
     expect(markup).toMatchSnapshot()
     expect(markup).toContain("Nested include")
     expect(markup).toContain("IT WORKS!")
+  })
+  it("Should recognise default Drupal functions", () => {
+    const markup = drupalFunctions()
+    expect(markup).toMatchSnapshot()
+    expect(markup).toContain("Functions work")
   })
 })
