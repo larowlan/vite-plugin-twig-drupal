@@ -95,6 +95,8 @@ export default defineConfig({
         // You can add custom functions - each is a function that is passed the active Twig instance and should call
         // e.g. extendFunction to register a function
         reverse: (twigInstance) => twigInstance.extendFunction("reverse", () => (text) => text.split(' ').reverse().join(' ')),
+        // e.g. extendFilter to register a filter
+        clean_unique_id: (twigInstance) => twigInstance.extendFilter("clean_unique_id", () => (text) => text.split(' ').reverse().join(' ')),
       },
       globalContext: {
         // Global variables that should be present in all templates.
