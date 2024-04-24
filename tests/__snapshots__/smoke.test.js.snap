@@ -32,6 +32,9 @@ exports[`Basic smoke test > Should support global context and functions 1`] = `
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
 </section>
+<h2>SDC</h2>
+<p>Card</p>
+<button>SDC</button>
 "
 `;
 
@@ -62,6 +65,9 @@ exports[`Basic smoke test > Should support includes 1`] = `
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
 </section>
+<h2>SDC</h2>
+<p>Card</p>
+<button>SDC</button>
 "
 `;
 
@@ -109,5 +115,8 @@ exports[`Basic smoke test > Should support variables 1`] = `
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
 </section>
+<h2>SDC</h2>
+<p>Card</p>
+<button>SDC</button>
 "
 `;
