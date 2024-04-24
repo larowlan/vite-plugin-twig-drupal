@@ -31,6 +31,7 @@ export default defineConfig({
       },
       namespaces: {
         tests: join(__dirname, "/tests/fixtures"),
+        jabba: join(__dirname, "/tests/fixtures/jabba"),
       },
     }),
   ],

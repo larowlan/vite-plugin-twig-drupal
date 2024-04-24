@@ -25,8 +25,16 @@ const includeTokenTypes = [
 ]
 
 const resolveFile = (directory, file) => {
-  if (existsSync(resolve(file))) {
-    return resolve(file)
+  const filesToTry = [file, `${file}.twig`, `${file}.html.twig`]
+  for (const ix in filesToTry) {
+    const path = resolve(filesToTry[ix])
+    if (existsSync(path)) {
+      return path
+    }
+    const withDir = resolve(directory, filesToTry[ix])
+    if (existsSync(withDir)) {
+      return withDir
+    }
   }
   return resolve(directory, file)
 }
@@ -49,6 +57,16 @@ const pluckIncludes = (tokens) => {
   ].filter((value, index, array) => {
     return array.indexOf(value) === index
   })
+}
+
+const resolveNamespaceOrComponent = (namespaces, template) => {
+  let resolveTemplate = template
+  // Support for SDC.
+  if (template.includes(":")) {
+    const [namespace, component] = template.split(":")
+    resolveTemplate = `@${namespace}/${component}/${component}`
+  }
+  return Twig.path.expandNamespace(namespaces, resolveTemplate)
 }
 
 const compileTemplate = (id, file, { namespaces }) => {
@@ -133,7 +151,7 @@ const plugin = (options = {}) => {
           const processIncludes = (template) => {
             const file = resolveFile(
               dirname(id),
-              Twig.path.expandNamespace(options.namespaces, template)
+              resolveNamespaceOrComponent(options.namespaces, template)
             )
             if (!seen.includes(template)) {
               includePromises.push(
@@ -159,7 +177,7 @@ const plugin = (options = {}) => {
               (template) =>
                 `import '${resolveFile(
                   dirname(id),
-                  Twig.path.expandNamespace(options.namespaces, template)
+                  resolveNamespaceOrComponent(options.namespaces, template)
                 )}';`
             )
             .join("\n")
