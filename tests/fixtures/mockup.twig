@@ -10,3 +10,12 @@
 {% endembed %}
 {% include "@tests/section.twig" %}
 {% include "../fixtures/section.twig" with {title: 'Relative include'} %}
+{% embed 'jabba:card' with {
+  title: 'SDC',
+  teaser: 'Card',
+} %}
+{% endembed %}
+{% embed 'jabba:button' with {
+  title: 'SDC',
+} %}
+{% endembed %}
