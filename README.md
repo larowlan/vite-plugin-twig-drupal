@@ -36,6 +36,7 @@
 - [This solution](#this-solution)
 - [Installation](#installation)
 - [Examples](#examples)
+- [Usage with React](#usage-with-react)
 - [Issues](#issues)
   - [🐛 Bugs](#-bugs)
   - [💡 Feature Requests](#-feature-requests)
@@ -157,8 +158,34 @@ export const ButtonStrip = {
     ${Button({title: 'Button 2', modifier: 'secondary'})}
   `
 }
+```
 
+## Usage with React
 
+When adding `framework: 'react'` to vite.config.js twig files will output React JSX functions
+that can be used inside a React Storybook instance.
+
+This way Twig components can be rendered alongside React components.
+
+However, you will need to revert to a straight TwigJS function import so you can nest Twig components
+inside other Twig components. In these instances append `?twig` to your component import. When nesting 
+Twig components inside React components this is not needed. Nesting React components inside Twig components
+does not work currently.
+
+```javascript
+import Button from './button.twig';
+import OtherComponent from ../other-component.twig?twig
+
+export default {
+  title: 'Components/Button',
+  tags: ['autodocs'],
+  args: {
+    // Render by calling the component as a function.
+    // You can pass any variables down as an object.
+    otherComponent: OtherComponent(),
+  },
+  component: Button,
+};
 
 ```
 

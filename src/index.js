@@ -126,10 +126,19 @@ const plugin = (options = {}) => {
       if (options.pattern.test(id)) {
         let frameworkInclude = ""
         let frameworkTransform = "const frameworkTransform = (html) => html;"
-        if (options.framework === FRAMEWORK_REACT) {
+
+        let asTwigJs = id.match(/\?twig$/)
+
+        if (options.framework === FRAMEWORK_REACT && !asTwigJs) {
           frameworkInclude = `import React from 'react'`
           frameworkTransform = `const frameworkTransform = (html) => React.createElement('div', {dangerouslySetInnerHTML: {'__html': html}});;`
         }
+
+        if (asTwigJs) {
+          // Tidy up file path by remove ?twig
+          id = id.slice(0, -5)
+        }
+
         let embed,
           embeddedIncludes,
           functions,
