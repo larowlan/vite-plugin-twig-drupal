@@ -168,7 +168,7 @@ that can be used inside a React Storybook instance.
 This way Twig components can be rendered alongside React components.
 
 However, you will need to revert to a straight TwigJS function import so you can nest Twig components
-inside other Twig components. In these instances appeand `?twig` to your component import. When nesting 
+inside other Twig components. In these instances append `?twig` to your component import. When nesting 
 Twig components inside React components this is not needed. Nesting React components inside Twig components
 does not work currently.
 
