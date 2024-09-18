@@ -39,6 +39,32 @@ const resolveFile = (directory, file) => {
   return resolve(directory, file)
 }
 
+const pluckBlocks = (stack) => {
+  const getBlockInclude = (params) => {
+    let seenComma = false
+    for (const i in params) {
+      if (!params.hasOwnProperty(i)) {
+        continue
+      }
+      if (seenComma) {
+        return params[i].value
+      }
+      if (params[i].type === "Twig.expression.type.comma") {
+        seenComma = true
+      }
+    }
+    return false
+  }
+  const out = stack
+    .filter(
+      (token) =>
+        token.type === "Twig.expression.type._function" && token.fn === "block"
+    )
+    .reduce((carry, token) => [...carry, getBlockInclude(token.params)], [])
+  // .filter((i) => !!i)
+  return out
+}
+
 const pluckIncludes = (tokens) => {
   return [
     ...tokens
@@ -51,7 +77,11 @@ const pluckIncludes = (tokens) => {
         []
       ),
     ...tokens.reduce(
-      (carry, token) => [...carry, ...pluckIncludes(token.token?.output || [])],
+      (carry, token) => [
+        ...carry,
+        ...pluckBlocks(token.stack || []),
+        ...pluckIncludes(token.token?.output || []),
+      ],
       []
     ),
   ].filter((value, index, array) => {

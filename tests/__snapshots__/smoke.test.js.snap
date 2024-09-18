@@ -5,6 +5,40 @@ exports[`Basic smoke test > Should recognise default Drupal functions 1`] = `
 <p>Functions work</p>"
 `;
 
+exports[`Basic smoke test > Should support blocks 1`] = `
+"<section>
+  <h1>Include</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<section>
+  <h1>Embed</h1>
+  <article>
+        Lorem ipsum dolor sit amet.
+    <button class=\\"button--primary\\">Nested include</button>
+          IT WORKS!
+        </article>
+</section>
+<section>
+  <h1></h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<section>
+  <h1>Relative include</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+
+<h2>SDC</h2>
+<p>Card</p>
+<button>SDC</button>
+"
+`;
+
 exports[`Basic smoke test > Should support global context and functions 1`] = `
 "<section>
   <h1>Include</h1>
@@ -32,6 +66,7 @@ exports[`Basic smoke test > Should support global context and functions 1`] = `
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
 </section>
+
 <h2>SDC</h2>
 <p>Card</p>
 <button>SDC</button>
@@ -65,6 +100,7 @@ exports[`Basic smoke test > Should support includes 1`] = `
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
 </section>
+
 <h2>SDC</h2>
 <p>Card</p>
 <button>SDC</button>
@@ -115,6 +151,7 @@ exports[`Basic smoke test > Should support variables 1`] = `
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
       </article>
 </section>
+
 <h2>SDC</h2>
 <p>Card</p>
 <button>SDC</button>
