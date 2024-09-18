@@ -1,6 +1,7 @@
 import Twig from "twig"
 import { resolve, dirname } from "node:path"
 import { existsSync } from "node:fs"
+import { normalizePath } from "vite"
 
 const { twig } = Twig
 
@@ -26,17 +27,23 @@ const includeTokenTypes = [
 
 const resolveFile = (directory, file) => {
   const filesToTry = [file, `${file}.twig`, `${file}.html.twig`]
+
+  let resolvedFile = ""
+
   for (const ix in filesToTry) {
     const path = resolve(filesToTry[ix])
     if (existsSync(path)) {
-      return path
+      resolvedFile = path
+      break
     }
     const withDir = resolve(directory, filesToTry[ix])
     if (existsSync(withDir)) {
-      return withDir
+      resolvedFile = withDir
+      break
     }
   }
-  return resolve(directory, file)
+
+  return normalizePath(resolvedFile || resolve(directory, file))
 }
 
 const pluckIncludes = (tokens) => {
