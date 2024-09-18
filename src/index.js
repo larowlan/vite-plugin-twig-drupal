@@ -30,11 +30,11 @@ const resolveFile = (directory, file) => {
   for (const ix in filesToTry) {
     const path = resolve(filesToTry[ix])
     if (existsSync(path)) {
-      return normalizePath(path);
+      return normalizePath(path)
     }
     const withDir = resolve(directory, filesToTry[ix])
     if (existsSync(withDir)) {
-      return normalizePath(withDir);
+      return normalizePath(withDir)
     }
   }
 
