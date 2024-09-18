@@ -1,6 +1,7 @@
 import Twig from "twig"
 import { resolve, dirname } from "node:path"
 import { existsSync } from "node:fs"
+import { normalizePath } from "vite"
 
 const { twig } = Twig
 
@@ -29,14 +30,15 @@ const resolveFile = (directory, file) => {
   for (const ix in filesToTry) {
     const path = resolve(filesToTry[ix])
     if (existsSync(path)) {
-      return path
+      return normalizePath(path)
     }
     const withDir = resolve(directory, filesToTry[ix])
     if (existsSync(withDir)) {
-      return withDir
+      return normalizePath(withDir)
     }
   }
-  return resolve(directory, file)
+
+  return normalizePath(resolve(directory, file))
 }
 
 const pluckIncludes = (tokens) => {
