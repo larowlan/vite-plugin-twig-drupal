@@ -27,23 +27,18 @@ const includeTokenTypes = [
 
 const resolveFile = (directory, file) => {
   const filesToTry = [file, `${file}.twig`, `${file}.html.twig`]
-
-  let resolvedFile = ""
-
   for (const ix in filesToTry) {
     const path = resolve(filesToTry[ix])
     if (existsSync(path)) {
-      resolvedFile = path
-      break
+      return normalizePath(path);
     }
     const withDir = resolve(directory, filesToTry[ix])
     if (existsSync(withDir)) {
-      resolvedFile = withDir
-      break
+      return normalizePath(withDir);
     }
   }
 
-  return normalizePath(resolvedFile || resolve(directory, file))
+  return normalizePath(resolve(directory, file))
 }
 
 const pluckIncludes = (tokens) => {
