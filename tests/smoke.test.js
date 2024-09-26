@@ -30,6 +30,14 @@ describe("Basic smoke test", () => {
     expect(markup).toContain("Contact")
     expect(markup).toMatchSnapshot()
   })
+  it("Should support nested SDC", () => {
+    const markup = Markup()
+    expect(markup).toContain("nested button 🙌")
+    expect(markup).toContain("included button 👈️")
+    expect(markup).toContain("Include card")
+    expect(markup).toContain("🏆️ winning")
+    expect(markup).toMatchSnapshot()
+  })
   it("Should support global context and functions", () => {
     const markup = Markup()
     expect(markup).toMatchSnapshot()
