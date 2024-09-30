@@ -49,4 +49,9 @@ describe("Basic smoke test", () => {
     expect(markup).toMatchSnapshot()
     expect(markup).toContain("Functions work")
   })
+  it("Should support blocks", () => {
+    const markup = Markup()
+    expect(markup).toMatchSnapshot()
+    expect(markup).toContain("hi jimmy")
+  })
 })
