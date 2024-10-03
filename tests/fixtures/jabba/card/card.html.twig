@@ -1,5 +1,9 @@
 <h2>{{title}}</h2>
 <p>{{teaser}}</p>
+{% include 'jabba:badge' with {
+  label: 'atom badge from nested dir 🙌',
+} %}
+
 {% include 'jabba:button' with {
   title: 'nested button 🙌',
 } %}

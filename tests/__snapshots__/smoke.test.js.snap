@@ -34,11 +34,13 @@ exports[`Basic smoke test > Should support global context and functions 1`] = `
 </section>
 <h2>SDC</h2>
 <p>Card</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <button>SDC</button>
 <button>included button 👈️</button>
 <h2>Include card</h2>
 <p>🏆️ winning</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 "
 `;
@@ -72,11 +74,13 @@ exports[`Basic smoke test > Should support includes 1`] = `
 </section>
 <h2>SDC</h2>
 <p>Card</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <button>SDC</button>
 <button>included button 👈️</button>
 <h2>Include card</h2>
 <p>🏆️ winning</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 "
 `;
@@ -127,11 +131,13 @@ exports[`Basic smoke test > Should support nested SDC 1`] = `
 </section>
 <h2>SDC</h2>
 <p>Card</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <button>SDC</button>
 <button>included button 👈️</button>
 <h2>Include card</h2>
 <p>🏆️ winning</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 "
 `;
@@ -165,11 +171,13 @@ exports[`Basic smoke test > Should support variables 1`] = `
 </section>
 <h2>SDC</h2>
 <p>Card</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <button>SDC</button>
 <button>included button 👈️</button>
 <h2>Include card</h2>
 <p>🏆️ winning</p>
+<div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 "
 `;
