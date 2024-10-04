@@ -29,7 +29,7 @@ const findInChildDirectories = (directory, component) => {
   const files = readdirSync(directory, { recursive: true })
   for (const file of files) {
     const filePath = join(directory, file)
-    if (file.endsWith(`${component}.twig`)) {
+    if (file.endsWith(`/${component}.twig`)) {
       if (existsSync(filePath)) {
         return filePath
       }
