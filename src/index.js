@@ -30,9 +30,7 @@ const findInChildDirectories = (directory, component) => {
   for (const file of files) {
     const filePath = join(directory, file)
     if (file.endsWith(`/${component}.twig`)) {
-      if (existsSync(filePath)) {
-        return filePath
-      }
+      return filePath
     }
   }
 
