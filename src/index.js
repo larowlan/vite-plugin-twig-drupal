@@ -1,6 +1,6 @@
 import Twig from "twig"
-import { resolve, dirname } from "node:path"
-import { existsSync } from "node:fs"
+import { join, resolve, dirname } from "node:path"
+import { existsSync, readdirSync } from "node:fs"
 import { normalizePath } from "vite"
 
 const { twig } = Twig
@@ -24,6 +24,18 @@ const includeTokenTypes = [
   "Twig.logic.type.extends",
   "Twig.logic.type.import",
 ]
+
+const findInChildDirectories = (directory, component) => {
+  const files = readdirSync(directory, { recursive: true })
+  for (const file of files) {
+    const filePath = join(directory, file)
+    if (file.endsWith(`/${component}.twig`)) {
+      return filePath
+    }
+  }
+
+  return null
+}
 
 const resolveFile = (directory, file) => {
   const filesToTry = [file, `${file}.twig`, `${file}.html.twig`]
@@ -63,12 +75,25 @@ const pluckIncludes = (tokens) => {
 
 const resolveNamespaceOrComponent = (namespaces, template) => {
   let resolveTemplate = template
+  const isNamespace = template.includes(":")
+
   // Support for SDC.
-  if (template.includes(":")) {
+  if (isNamespace) {
     const [namespace, component] = template.split(":")
     resolveTemplate = `@${namespace}/${component}/${component}`
   }
-  return Twig.path.expandNamespace(namespaces, resolveTemplate)
+  let expandedPath = Twig.path.expandNamespace(namespaces, resolveTemplate)
+
+  // If file not found and we are in namespace -> search deeper.
+  if (!existsSync(expandedPath) && isNamespace) {
+    const [namespace, component] = template.split(":")
+    let foundFile = findInChildDirectories(namespaces[namespace], component)
+    if (existsSync(foundFile)) {
+      expandedPath = foundFile
+    }
+  }
+
+  return expandedPath
 }
 
 const compileTemplate = (id, file, { namespaces }) => {
@@ -224,7 +249,7 @@ const plugin = (options = {}) => {
         ${functions}
 
         addDrupalExtensions(Twig);
-        
+
         // Disable caching.
         Twig.cache(false);
 
