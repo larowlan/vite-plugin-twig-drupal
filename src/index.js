@@ -261,7 +261,7 @@ const plugin = (options = {}) => {
           ${includes ? `component.options.allowInlineIncludes = true;` : ""}
           try {
             return frameworkTransform(component.render({
-              attributes: new DrupalAttribute(),
+              attributes: new DrupalAttribute(context.defaultAttributes ? context.defaultAttributes : []),
               ...${JSON.stringify(options.globalContext)},
               ...context
             }));
