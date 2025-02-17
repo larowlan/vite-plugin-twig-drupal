@@ -260,8 +260,13 @@ const plugin = (options = {}) => {
           const component = ${code}
           ${includes ? `component.options.allowInlineIncludes = true;` : ""}
           try {
+            let defaultAttributes = context.defaultAttributes ? context.defaultAttributes : [];
+            if (!Array.isArray(defaultAttributes)) {
+              // We were passed a map, turn it into an array.
+              defaultAttributes = Object.entries(defaultAttributes);
+            }
             return frameworkTransform(component.render({
-              attributes: new DrupalAttribute(),
+              attributes: new DrupalAttribute(defaultAttributes),
               ...${JSON.stringify(options.globalContext)},
               ...context
             }));

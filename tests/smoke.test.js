@@ -49,4 +49,22 @@ describe("Basic smoke test", () => {
     expect(markup).toMatchSnapshot()
     expect(markup).toContain("Functions work")
   })
+  it("Should cast default attributes to attributes", () => {
+    const markup = Markup({
+      defaultAttributes: [["class", ["ponies"]]],
+    })
+    expect(markup).toMatchSnapshot()
+    expect(markup).toContain('class="ponies"')
+    expect(markup).toContain("hey there")
+  })
+  it("Should support default attributes as a map", () => {
+    const markup = Markup({
+      defaultAttributes: {
+        class: ["ponies"],
+      },
+    })
+    expect(markup).toMatchSnapshot()
+    expect(markup).toContain('class="ponies"')
+    expect(markup).toContain("hey there")
+  })
 })

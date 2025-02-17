@@ -1,8 +1,90 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Basic smoke test > Should cast default attributes to attributes 1`] = `
+"<section>
+  <h1>Include</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<section>
+  <h1>Embed</h1>
+  <article>
+        Lorem ipsum dolor sit amet.
+    <button class=\\"button--primary\\">Nested include</button>
+          IT WORKS!
+        </article>
+</section>
+<section>
+  <h1></h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<section>
+  <h1>Relative include</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<h2>SDC</h2>
+<p>Card</p>
+<div>atom badge from nested dir 🙌</div>
+<button>nested button 🙌</button>
+<button>SDC</button>
+<button>included button 👈️</button>
+<h2>Include card</h2>
+<p>🏆️ winning</p>
+<div>atom badge from nested dir 🙌</div>
+<button>nested button 🙌</button>
+<div  class=\\"ponies\\">hey there</div>
+"
+`;
+
 exports[`Basic smoke test > Should recognise default Drupal functions 1`] = `
 "
 <p>Functions work</p>"
+`;
+
+exports[`Basic smoke test > Should support default attributes as a map 1`] = `
+"<section>
+  <h1>Include</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<section>
+  <h1>Embed</h1>
+  <article>
+        Lorem ipsum dolor sit amet.
+    <button class=\\"button--primary\\">Nested include</button>
+          IT WORKS!
+        </article>
+</section>
+<section>
+  <h1></h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<section>
+  <h1>Relative include</h1>
+  <article>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos fugiat inventore laborum maiores molestiae neque quia quo unde veniam?
+      </article>
+</section>
+<h2>SDC</h2>
+<p>Card</p>
+<div>atom badge from nested dir 🙌</div>
+<button>nested button 🙌</button>
+<button>SDC</button>
+<button>included button 👈️</button>
+<h2>Include card</h2>
+<p>🏆️ winning</p>
+<div>atom badge from nested dir 🙌</div>
+<button>nested button 🙌</button>
+<div  class=\\"ponies\\">hey there</div>
+"
 `;
 
 exports[`Basic smoke test > Should support global context and functions 1`] = `
@@ -42,6 +124,7 @@ exports[`Basic smoke test > Should support global context and functions 1`] = `
 <p>🏆️ winning</p>
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
+<div >hey there</div>
 "
 `;
 
@@ -82,6 +165,7 @@ exports[`Basic smoke test > Should support includes 1`] = `
 <p>🏆️ winning</p>
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
+<div >hey there</div>
 "
 `;
 
@@ -139,6 +223,7 @@ exports[`Basic smoke test > Should support nested SDC 1`] = `
 <p>🏆️ winning</p>
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
+<div >hey there</div>
 "
 `;
 
@@ -179,5 +264,6 @@ exports[`Basic smoke test > Should support variables 1`] = `
 <p>🏆️ winning</p>
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
+<div >hey there</div>
 "
 `;
