@@ -39,7 +39,7 @@ exports[`Basic smoke test > Should cast default attributes to attributes 1`] = `
 <button>nested button 🙌</button>
 <div  class=\\"ponies\\">hey there</div>
   All received
-"
+  "
 `;
 
 exports[`Basic smoke test > Should recognise default Drupal functions 1`] = `
@@ -86,7 +86,7 @@ exports[`Basic smoke test > Should support default attributes as a map 1`] = `
 <button>nested button 🙌</button>
 <div  class=\\"ponies\\">hey there</div>
   All received
-"
+  "
 `;
 
 exports[`Basic smoke test > Should support global context and functions 1`] = `
@@ -128,7 +128,7 @@ exports[`Basic smoke test > Should support global context and functions 1`] = `
 <button>nested button 🙌</button>
 <div >hey there</div>
   All received
-"
+  "
 `;
 
 exports[`Basic smoke test > Should support includes 1`] = `
@@ -170,7 +170,7 @@ exports[`Basic smoke test > Should support includes 1`] = `
 <button>nested button 🙌</button>
 <div >hey there</div>
   All received
-"
+  "
 `;
 
 exports[`Basic smoke test > Should support macros 1`] = `
@@ -229,7 +229,7 @@ exports[`Basic smoke test > Should support nested SDC 1`] = `
 <button>nested button 🙌</button>
 <div >hey there</div>
   All received
-"
+  "
 `;
 
 exports[`Basic smoke test > Should support variables 1`] = `
@@ -271,5 +271,5 @@ exports[`Basic smoke test > Should support variables 1`] = `
 <button>nested button 🙌</button>
 <div >hey there</div>
   All received
-"
+  "
 `;

@@ -70,5 +70,6 @@ describe("Basic smoke test", () => {
   it("Should support extends", () => {
     const markup = Markup()
     expect(markup).toContain("All received")
+    expect(markup).toContain("pony town")
   })
 })
