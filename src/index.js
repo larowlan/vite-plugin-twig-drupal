@@ -171,7 +171,7 @@ const plugin = (options = {}) => {
           functions,
           code,
           includes,
-          seen = []
+          seen = {}
 
         try {
           const result = await compileTemplate(id, id, options).catch(
@@ -183,31 +183,36 @@ const plugin = (options = {}) => {
           }
           code = result.code
           includes = result.includes
-          const includePromises = []
-          const processIncludes = (template) => {
-            const file = resolveFile(
-              dirname(id),
-              resolveNamespaceOrComponent(options.namespaces, template)
-            )
-            if (!seen.includes(template)) {
-              includePromises.push(
-                new Promise(async (resolve, reject) => {
-                  const { includes, code } = await compileTemplate(
-                    template,
-                    file,
-                    options
-                  ).catch(errorHandler(template, false))
-                  if (includes) {
-                    includes.forEach(processIncludes)
+
+          // Process includes in a queue.
+          const promisifyIncludes = (includes) => {
+            return includes.reduce(
+              (queue, template) =>
+                queue.then(() => {
+                  const file = resolveFile(
+                    dirname(id),
+                    resolveNamespaceOrComponent(options.namespaces, template)
+                  )
+                  if (!(template in seen)) {
+                    return compileTemplate(template, file, options)
+                      .catch(errorHandler(template, false))
+                      .then(({ code, includes }) => {
+                        seen[template] = code
+                        if (!includes) {
+                          return Promise.resolve()
+                        }
+                        return promisifyIncludes(includes)
+                      })
                   }
-                  resolve(code)
-                })
-              )
-              seen.push(template)
-            }
+                  return Promise.resolve()
+                }),
+              Promise.resolve()
+            )
           }
-          includes.forEach(processIncludes)
-          embed = includes
+          const includeResult = await promisifyIncludes(includes).catch(
+            errorHandler(id)
+          )
+          embed = Object.keys(seen)
             .filter((template) => template !== "_self")
             .map(
               (template) =>
@@ -227,14 +232,11 @@ const plugin = (options = {}) => {
             })
             .join("\n")
 
-          const includeResult = await Promise.all(includePromises).catch(
-            errorHandler(id)
-          )
-          if (!Array.isArray(includeResult) && "map" in includeResult) {
+          if (includeResult !== undefined && "map" in includeResult) {
             // An error occurred.
             return includeResult
           }
-          embeddedIncludes = includeResult.reverse().join("\n")
+          embeddedIncludes = Object.values(seen).reverse().join("\n")
         } catch (e) {
           return errorHandler(id)(e)
         }

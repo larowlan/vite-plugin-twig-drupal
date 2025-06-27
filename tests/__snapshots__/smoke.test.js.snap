@@ -38,6 +38,8 @@ exports[`Basic smoke test > Should cast default attributes to attributes 1`] = `
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <div  class=\\"ponies\\">hey there</div>
+  All received
+  pony town
 "
 `;
 
@@ -84,6 +86,8 @@ exports[`Basic smoke test > Should support default attributes as a map 1`] = `
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <div  class=\\"ponies\\">hey there</div>
+  All received
+  pony town
 "
 `;
 
@@ -125,6 +129,8 @@ exports[`Basic smoke test > Should support global context and functions 1`] = `
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <div >hey there</div>
+  All received
+  pony town
 "
 `;
 
@@ -166,6 +172,8 @@ exports[`Basic smoke test > Should support includes 1`] = `
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <div >hey there</div>
+  All received
+  pony town
 "
 `;
 
@@ -224,6 +232,8 @@ exports[`Basic smoke test > Should support nested SDC 1`] = `
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <div >hey there</div>
+  All received
+  pony town
 "
 `;
 
@@ -265,5 +275,7 @@ exports[`Basic smoke test > Should support variables 1`] = `
 <div>atom badge from nested dir 🙌</div>
 <button>nested button 🙌</button>
 <div >hey there</div>
+  All received
+  pony town
 "
 `;
