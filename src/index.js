@@ -146,9 +146,6 @@ const plugin = (options = {}) => {
         options.root = root
       }
     },
-    async shouldTransformCachedModule(src, id) {
-      return options.pattern.test(id)
-    },
     async transform(src, id) {
       if (options.pattern.test(id)) {
         let frameworkInclude = ""
