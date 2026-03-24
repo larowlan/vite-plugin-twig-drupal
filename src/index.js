@@ -146,9 +146,6 @@ const plugin = (options = {}) => {
         options.root = root
       }
     },
-    async shouldTransformCachedModule(src, id) {
-      return options.pattern.test(id)
-    },
     async transform(src, id) {
       if (options.pattern.test(id)) {
         let frameworkInclude = ""
@@ -193,6 +190,7 @@ const plugin = (options = {}) => {
                     dirname(id),
                     resolveNamespaceOrComponent(options.namespaces, template)
                   )
+                  this.addWatchFile(file)
                   if (!(template in seen)) {
                     return compileTemplate(template, file, options)
                       .catch(errorHandler(template, false))
