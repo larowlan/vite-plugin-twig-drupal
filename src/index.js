@@ -190,6 +190,7 @@ const plugin = (options = {}) => {
                     dirname(id),
                     resolveNamespaceOrComponent(options.namespaces, template)
                   )
+                  this.addWatchFile(file)
                   if (!(template in seen)) {
                     return compileTemplate(template, file, options)
                       .catch(errorHandler(template, false))

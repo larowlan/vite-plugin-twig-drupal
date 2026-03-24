@@ -17,6 +17,7 @@ export default defineConfig({
         ),
       },
       name: "vite-plugin-twig-drupal",
+      formats: ["es"],
       fileName: (_, entry) => `${entry}.js`,
     },
   },
