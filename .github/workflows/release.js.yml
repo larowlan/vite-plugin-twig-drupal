@@ -3,8 +3,11 @@ on:
   push:
     branches:
       - 'main'
-      - 'beta'
-  pull_request: {}
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   main:
     strategy:
@@ -59,7 +62,7 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: 20
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
@@ -79,4 +82,3 @@ jobs:
             ]
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
