@@ -1,84 +1,41 @@
-name: validate
+name: Release
 on:
   push:
     branches:
-      - 'main'
+      - main
 
 permissions:
-  id-token: write
-  contents: write
+  contents: read # for checkout
 
 jobs:
-  main:
-    strategy:
-      matrix:
-        node: [18, 20, 22]
-        vite: [4, 5, 6, 7, 8]
-        exclude:
-          - node: 18
-            vite: 7
-          - node: 18
-            vite: 8
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.0
-
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-
-      - name: ⚡️ Setup vite
-        run: npm install vite@${{ matrix.vite }}
-
-      - name: 🧹 Linting
-        run: npm run lint
-
-      - name: ✅ Tests
-        run: npm run test
-
   release:
-    needs: main
+    name: Release
     runs-on: ubuntu-latest
-    if:
-      ${{ github.repository == 'larowlan/vite-plugin-twig-drupal' &&
-      contains('refs/heads/main',github.ref) && github.event_name == 'push' }}
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for trusted publishing and npm provenance
     steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.0
-
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: 20
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          useLockFile: false
-
-      - name: 🏗 Run build script
+          node-version: "lts/*"
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm run test
+      - name: Build
         run: npm run build
-
-      - name: 🚀 Release
-        uses: cycjimmy/semantic-release-action@v4
-        with:
-          semantic_version: 22
-          branches: |
-            [
-              'main'
-            ]
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
