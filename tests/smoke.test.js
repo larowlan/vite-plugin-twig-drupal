@@ -3,6 +3,7 @@ import Error from "../dist/error.js"
 import ErrorInclude from "../dist/errorInclude.js"
 import drupalFunctions from "../dist/drupalFunctions.js"
 import Menu from "../dist/menu.js"
+import SelfImport from "../dist/selfImport.js"
 import { describe, expect, it } from "vitest"
 
 describe("Basic smoke test", () => {
@@ -71,5 +72,11 @@ describe("Basic smoke test", () => {
     const markup = Markup()
     expect(markup).toContain("All received")
     expect(markup).toContain("pony town")
+  })
+  it("Should support import _self for recursive macros", () => {
+    const markup = SelfImport()
+    expect(markup).toContain("Home")
+    expect(markup).toContain("About")
+    expect(markup).toMatchSnapshot()
   })
 })

@@ -15,6 +15,7 @@ export default defineConfig({
           __dirname,
           "tests/fixtures/drupal-functions.twig"
         ),
+        selfImport: resolve(__dirname, "tests/fixtures/self-import.twig"),
       },
       name: "vite-plugin-twig-drupal",
       formats: ["es"],
