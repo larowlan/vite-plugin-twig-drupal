@@ -1,0 +1,12 @@
+{% import _self as nav %}
+
+{% macro menu_link(title, href) %}
+  <li><a href="{{ href }}">{{ title }}</a></li>
+{% endmacro %}
+
+<nav>
+  <ul>
+    {{ nav.menu_link('Home', '/home') }}
+    {{ nav.menu_link('About', '/about') }}
+  </ul>
+</nav>

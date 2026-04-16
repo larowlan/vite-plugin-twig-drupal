@@ -186,6 +186,11 @@ const plugin = (options = {}) => {
             return includes.reduce(
               (queue, template) =>
                 queue.then(() => {
+                  // _self is a special Twig variable referring to the current
+                  // template — it is not a real file import.
+                  if (template === "_self") {
+                    return Promise.resolve()
+                  }
                   const file = resolveFile(
                     dirname(id),
                     resolveNamespaceOrComponent(options.namespaces, template)
