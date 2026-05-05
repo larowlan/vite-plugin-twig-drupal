@@ -12,6 +12,13 @@ jobs:
             vite: 7
           - node: 18
             vite: 8
+        include:
+          - node: 18
+            twig: 1
+          - node: 20
+            twig: 2
+          - node: 22
+            twig: 3
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -32,6 +39,9 @@ jobs:
 
       - name: ⚡️ Setup vite
         run: npm install vite@${{ matrix.vite }}
+
+      - name: 🌱 Setup twig
+        run: npm install twig@${{ matrix.twig }}
 
       - name: 🧹 Linting
         run: npm run lint
